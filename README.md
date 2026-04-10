@@ -13,7 +13,7 @@ A production-shaped application that ingests, stores, exposes and visualises int
 ```bash
 # 1. Clone the repo
 git clone https://github.com/Jitesh001/Forbes-Assignment-Solution.git 
-cd rate-tracker
+cd Forbes-Assignment-Solution
 
 # 2. Copy environment file
 cp .env.example .env
