@@ -51,6 +51,8 @@ Option B (cron + management command): Simpler deployment — one cron line calli
 
 I chose Celery because the assessment explicitly values observability and idempotency. Celery gives us structured task logging, automatic retries, and a path to horizontal scaling (add workers) that cron doesn't offer. The tradeoff is operational complexity — two extra containers and a Redis dependency — but Redis is already needed for API response caching, so the marginal cost is only the worker/beat containers.
 
+**Auto-provisioning:** The periodic task is created automatically on startup via the `setup_periodic_tasks` management command, which runs as part of the `web` service startup (after migrations). It uses `get_or_create` so it is idempotent — safe to run on every deploy. The `celery-beat` and `celery-worker` services depend on the `web` service healthcheck, ensuring migrations and task setup are complete before they start.
+
 ## 4. One Thing I Would Change With More Time
 
 **Replace the 60-second polling refresh with server-sent events (SSE) or WebSocket push.**

@@ -18,19 +18,16 @@ cd Forbes-Assignment-Solution
 # 2. Copy environment file
 cp .env.example .env
 
-# 3. Start all services
+# 3. Start all services (migrations and periodic task setup run automatically)
 docker compose up --build -d
 
-# 4. Run database migrations
-docker compose exec web python manage.py migrate
-
-# 5. Seed the database (~1M rows, takes 1-2 minutes)
+# 4. Seed the database (~1M rows, takes 1-2 minutes)
 docker compose exec web python manage.py seed_data
 
-# 6. Create an admin user (optional, for Django admin panel)
+# 5. Create an admin user (optional, for Django admin panel)
 docker compose exec web python manage.py createsuperuser
 
-# 7. Open the app
+# 6. Open the app
 # API:       http://localhost:8000/api/rates/latest/
 # Frontend:  http://localhost:3000
 # Admin:     http://localhost:8000/admin/
@@ -111,7 +108,7 @@ See [schema.md](schema.md) for database schema documentation including index rat
 ```
 ├── config/              # Django project settings, URLs, Celery config
 ├── rates/               # Main Django app
-│   ├── management/      # seed_data command
+│   ├── management/      # seed_data, setup_periodic_tasks commands
 │   ├── migrations/      # Database migrations
 │   ├── models.py        # Rate, RawResponse models
 │   ├── serializers.py   # DRF serializers
