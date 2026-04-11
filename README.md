@@ -145,6 +145,20 @@ All configuration is via environment variables. See `.env.example` for the full 
 | `REDIS_URL` | Yes | Redis connection string |
 | `INGEST_BEARER_TOKEN` | Yes | Auth token for POST /rates/ingest/ |
 
+## Built with Claude
+
+This project was developed with the assistance of [Claude](https://claude.ai), Anthropic's AI assistant. Claude was used throughout the development lifecycle:
+
+1. **Understanding the problem statement** — Broke down the assignment requirements, clarified ambiguities, and identified the core deliverables (ingestion, storage, API, and visualisation).
+2. **Project structure and data schema design** — Finalised the directory layout, Django app organisation, and designed the database schema (models, indexes, constraints) to handle ~1M+ rows efficiently.
+3. **Data ingestion scripts** — Wrote the `seed_data` management command and the ingestion service logic, including idempotency handling and bulk insert strategies.
+4. **API design and implementation** — Built the DRF serializers, views, and query optimisations for the `/latest/` and `/history/` endpoints.
+5. **Celery task and caching setup** — Configured Celery Beat for periodic ingestion, Redis caching, and cache invalidation logic.
+6. **Frontend development** — Scaffolded the Vue.js 3 frontend with TailwindCSS, built the rate table and history chart components, and wired up the Axios API client.
+7. **Docker and deployment configuration** — Authored the Dockerfile, docker-compose.yml, and Makefile for single-command orchestration of all services.
+8. **Testing** — Wrote pytest-based tests covering ingestion, API responses, authentication, and edge cases.
+9. **Documentation** — Drafted README, DECISIONS.md, and schema.md to clearly communicate architecture and design rationale.
+
 ## Stopping
 
 ```bash
